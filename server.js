@@ -17,6 +17,15 @@ function handler (request, response) {
       }
       response.end(file);
     });
+  } else {
+    response.writeHead(200, { "content-type": "text/" + endpoint.split('.')[1]} );
+    fs.readFile(__dirname + '/public/' + endpoint, function(error, file) {
+      if (error) {
+        console.log (error);
+        return;
+      }
+      response.end(file);
+    });
   }
   // if (endpoint == '/node') {
   //   response.writeHead(200, {"Content-Type": "text/html"});
